@@ -20,7 +20,7 @@ Transition Logic (closed-loop):
     1. Count spikes per state-channel group → determine current state
     2. Apply next input symbol via stimulation
     3. Record the transition
-    4. At the end, check whether we landed in the accepting state (FS)
+    4. At the end, check whether we landed in the accepting state (FS) or not
 
 Run:
   Python3 project.py
@@ -62,13 +62,14 @@ START_STATE = "q0"
 ACCEPTING_STATE = "FS"
 
 # Biphasic stim: 160 µs pulse width, ±1.5 µA — gentle enough not to dominate
+#Note: StimDesign defines the shape of the electrical pulse you're sending into the neurons.
 STIM_DESIGN = StimDesign(160, -1.5, 160, 1.5)
 
 # A Spike object is created for each spike detected by the system, and these are placed in a list at LoopTick.analysis.spikes.
 # Spike objects expose the following properties:
-#   channel:   Which channel the spike was detected on
+#   channel: Which channel the spike was detected on
 #   timestamp: Timestamp of the sample that triggered the detection of the spike
-#   samples:   NumPy array of 75 floating point µV sample values around timestamp
+#   samples: NumPy array of 75 floating point µV sample values around timestamp
 
 def detectState(spikes: list) -> str:
     """
@@ -228,6 +229,8 @@ Give users option to test a specific string to see if it's accepted,
 or to run all test cases provided within runTestSuite.
 """
 if __name__ == "__main__":
+    #print(__doc__)
+
     option = input("Enter (1) for custom one liner input or (2) for full test suite: ")
 
     if option == "1":
