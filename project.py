@@ -48,7 +48,7 @@ INPUT_CHANNELS = {
     "1": ChannelSet(50, 51),
 }
 
-# delta transition table: (current_state, input_symbol) → next_state 
+# delta transition table: (current_state, input_symbol) → next_state
 TRANSITIONS = {
     ("q0", "0"): "q0",
     ("q0", "1"): "S1",
@@ -58,7 +58,7 @@ TRANSITIONS = {
     ("FS", "1"): "FS",
 }
 
-START_STATE     = "q0"
+START_STATE = "q0"
 ACCEPTING_STATE = "FS"
 
 # Biphasic stim: 160 µs pulse width, ±1.5 µA — gentle enough not to dominate
@@ -122,7 +122,7 @@ def runFSA(input_string: str, ticks_per_symbol: int = 50):
         loop_ticks = ticks_per_symbol * (len(input_string) + 2)  # +2 settle ticks
 
         for tick in neurons.loop(ticks_per_second=200, stop_after_ticks=loop_ticks):
-            spikes         = tick.analysis.spikes
+            spikes = tick.analysis.spikes
             observed_state = detectState(spikes)
 
             # After the first 'settle' pass, start feeding symbols
@@ -144,10 +144,10 @@ def runFSA(input_string: str, ticks_per_symbol: int = 50):
                     fsa_stream.append(
                         neurons.timestamp(),
                         {
-                            "symbol":                symbol,
-                            "from_state":            state_trace[-2],
-                            "to_state":              current_state,
-                            "spike_count":           len(spikes),
+                            "symbol": symbol,
+                            "from_state": state_trace[-2],
+                            "to_state": current_state,
+                            "spike_count": len(spikes),
                             "observed_neural_state": observed_state,
                         }
                     )
@@ -176,16 +176,16 @@ def runTestSuite():
     The FSA accepts binary strings ending in "11".
     """
     test_cases = [
-        ("11",    True,  "straightforward acceptance"),
-        ("011",   True,  "quicl prefix then accept"),
-        ("1011",  True,  "funny accepting"),
-        ("10",    False, "ends in 0"),
-        ("0",     False, "a zero"),
-        ("1",     False, "a one"),
-        ("010",   False, "no trailing 11"),
-        ("111",   True,  "three ones — its accepted"),
-        ("1100",  False, "starts off good but then no bueno"),
-        ("10011", True,  "longer string but still accepted"),
+        ("11", True, "straightforward acceptance"),
+        ("011", True, "quicl prefix then accept"),
+        ("1011",True, "funny accepting"),
+        ("10", False, "ends in 0"),
+        ("0", False, "a zero"),
+        ("1", False, "a one"),
+        ("010", False, "no trailing 11s"),
+        ("111", True, "three ones still accepted"),
+        ("1100", False, "starts off good but then no bueno"),
+        ("10011", True, "longer string but still accepted"),
         # Add your own test cases below:
         #10/11 cases will be accepted
         ("00",    True, "dummy test case"),
@@ -228,8 +228,6 @@ Give users option to test a specific string to see if it's accepted,
 or to run all test cases provided within runTestSuite.
 """
 if __name__ == "__main__":
-    print(__doc__)
-
     option = input("Enter (1) for custom one liner input or (2) for full test suite: ")
 
     if option == "1":
