@@ -224,8 +224,18 @@ def runTestSuite():
 
 #main function
 """
-Will give user option to test a specific string to see if it's accepted,
+Give users option to test a specific string to see if it's accepted,
 or to run all test cases provided within runTestSuite.
 """
 if __name__ == "__main__":
     print(__doc__)
+
+    option = input("Enter (1) for custom one liner input or (2) for full test suite: ")
+
+    if option == "1":
+        user_input = input("Enter the input string for the FSA: ")
+        accepted, trace = runFSA(user_input)
+        print("Accepted:", accepted)
+        print("Trace:", trace)
+    else:
+        runTestSuite()
