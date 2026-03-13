@@ -18,27 +18,35 @@ For installation: https://docs.corticallabs.com/#installation
 
 CL API Documentation Pre-Release: https://github.com/Cortical-Labs/cl-api-doc/tree/main
 
-=================================================================
+==============================================================================================
 Implements a Finite State Automaton (FSA) over biological neural activity.
 
 FSA Definition (recognises binary strings ending in "11"):
-  States: S0 (start), S1 (seen one '1'), S2 (accepting — seen "11")
+  States: q0 (start), S1 (seen one '1'), FS (accepting — seen "11")
 
 Channel Mapping:
-  S0  → channels 10, 11   (start state)
+  Start State  → channels 10, 11   (start state, q0)
   S1  → channels 20, 21   (intermediate state)
-  S2  → channels 30, 31   (ACCEPTING state)
+  FS  → channels 30, 31   (Final State, FS)
 
 Input Symbols:
   '0' → stimulate channels 40, 41
   '1' → stimulate channels 50, 51
 
-Transition Logic (closed-loop):
+Transition Logic:
   Each tick we:
-    1. Count spikes per state-channel group → determine current state
-    2. Apply next input symbol via stimulation
+    1. Count spikes/state-channel group → thus we can determine current state we are in
+    2. Apply next input symbol via stimulation(essentially the delta transition)
     3. Record the transition
-    4. At the end, check whether we landed in the accepting state (S2)
+    4. At the end, determine whether we landed in the accepting state (FS) or not
+
+
+Extra libraries and why:
+
+
+from dotenv import load_dotenv
+load_dotenv(".env")
+
 
 To run:
   Python3 project.py
