@@ -1,6 +1,6 @@
 # Biological-Neural-Finite-State-Automata# Biological-Neural-Finite-State-Automata
-"""
-Biological Neural FSA Experiment — Cortical Labs SDK (Simulator)
+
+## Biological Neural FSA Experiment — Cortical Labs SDK (Simulator)
 =================================================================
 Implements a Finite State Automaton (FSA) over biological neural activity.
 
