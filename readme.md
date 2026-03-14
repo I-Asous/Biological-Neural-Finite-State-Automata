@@ -1,4 +1,4 @@
-# Biological-Neural-Finite-State-Automata# Biological-Neural-Finite-State-Automata
+# Biological-Neural-Finite-State-Automata
 
 ## Biological Neural FSA Experiment — Cortical Labs SDK (Simulator)
 =================================================================
